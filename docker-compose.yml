@@ -1,0 +1,41 @@
+version: "3.8"
+name: disumprevies
+
+services:
+  bot:
+    container_name: bot_disumprevies
+    build:
+      context: .
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - TZ=Asia/Tokyo
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    networks:
+      - disumprevies_network
+  db:
+    image: postgres:15
+    container_name: db_disumprevies
+    restart: always
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    networks:
+      - disumprevies_network
+
+networks:
+  disumprevies_network:
+    driver: bridge
