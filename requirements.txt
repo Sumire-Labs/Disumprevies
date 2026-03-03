@@ -1,1 +1,5 @@
+asyncpg
 discord.py==2.7.0
+loguru
+python-dotenv
+rich
