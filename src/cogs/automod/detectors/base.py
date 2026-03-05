@@ -1,3 +1,4 @@
+# src\cogs\automod\detectors\base.py
 from dataclasses import dataclass
 from typing import Optional
 

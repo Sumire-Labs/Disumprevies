@@ -1,3 +1,4 @@
+# src\cogs\automod\detectors\__init__.py
 from .base import DetectionResult, is_whitelisted
 from .spam_detector import detect_spam
 from .duplicate_detector import detect_duplicate

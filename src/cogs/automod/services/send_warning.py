@@ -1,3 +1,4 @@
+# src\cogs\automod\services\send_warning.py
 import discord
 
 from src.core.database.models import PunishmentType

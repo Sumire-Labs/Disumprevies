@@ -1,3 +1,4 @@
+# src\cogs\automod\detectors\ngword_detector.py
 from typing import Optional
 
 import discord

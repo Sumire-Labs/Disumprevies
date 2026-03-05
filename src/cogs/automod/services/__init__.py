@@ -1,3 +1,4 @@
+# src\cogs\automod\services\__init__.py
 from .check_message import check_message
 from .add_violation import add_violation
 from .check_punishment import check_punishment

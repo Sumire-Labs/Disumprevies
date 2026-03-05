@@ -1,3 +1,4 @@
+# src\cogs\automod\services\apply_ban.py
 import discord
 
 from src.core.database.models import PunishmentType

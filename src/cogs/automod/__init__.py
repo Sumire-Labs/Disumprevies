@@ -1,3 +1,4 @@
+# src\cogs\automod\__init__.py
 from discord.ext import commands
 
 from .handlers import AutomodHandler

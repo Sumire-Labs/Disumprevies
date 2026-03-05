@@ -1,3 +1,4 @@
+# src\cogs\automod\detectors\invite_detector.py
 import re
 
 import discord

@@ -1,3 +1,4 @@
+# src\cogs\automod\services\check_punishment.py
 from typing import Optional
 
 from src.core.database.models import PunishmentType

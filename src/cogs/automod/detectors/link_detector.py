@@ -1,3 +1,4 @@
+# src\cogs\automod\detectors\link_detector.py
 import re
 
 import discord
