@@ -27,6 +27,7 @@ COMMAND_PREFIX: str = os.getenv("COMMAND_PREFIX", "!")
 COGS: list[str] = [
     "src.cogs.logger",
     "src.cogs.automod",
+    "src.cogs.moderation"
 ]
 
 
