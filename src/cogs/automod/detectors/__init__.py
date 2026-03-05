@@ -1,4 +1,5 @@
-# src\cogs\automod\detectors\__init__.py
+# src/cogs/automod/detectors/__init__.py
+
 from .base import DetectionResult, is_whitelisted
 from .spam_detector import detect_spam
 from .duplicate_detector import detect_duplicate
@@ -6,6 +7,15 @@ from .ngword_detector import detect_ngword
 from .mention_detector import detect_mention
 from .invite_detector import detect_invite
 from .link_detector import detect_link
+from .raid_detector import (
+    check_raid,
+    is_raid_active,
+    get_raid_status,
+    activate_raid,
+    deactivate_raid,
+    clear_join_history,
+    RaidStatus,
+)
 
 __all__ = [
     "DetectionResult",
@@ -16,4 +26,11 @@ __all__ = [
     "detect_mention",
     "detect_invite",
     "detect_link",
+    "check_raid",
+    "is_raid_active",
+    "get_raid_status",
+    "activate_raid",
+    "deactivate_raid",
+    "clear_join_history",
+    "RaidStatus",
 ]
