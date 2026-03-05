@@ -1,3 +1,4 @@
+# src\cogs\logger\embeds\__init__.py
 from .mod_embeds import ModEmbeds
 from .message_embeds import MessageEmbeds
 from .member_embeds import MemberEmbeds

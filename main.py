@@ -25,6 +25,7 @@ COMMAND_PREFIX: str = os.getenv("COMMAND_PREFIX", "!")
 
 # Cog の登録
 COGS: list[str] = [
+    "src.cogs.logger",
 ]
 
 

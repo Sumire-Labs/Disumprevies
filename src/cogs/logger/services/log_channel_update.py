@@ -1,3 +1,4 @@
+# src\cogs\logger\services\log_channel_update.py
 import discord
 
 from src.core.database.models import LogType

@@ -1,4 +1,4 @@
-# src/cogs/logger/services/__init__.py
+# src\cogs\logger\services\__init__.py
 
 from .base import get_log_channel, send_log, is_ignored
 from .log_auto_delete import log_auto_delete
