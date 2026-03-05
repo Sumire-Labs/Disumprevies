@@ -1,6 +1,6 @@
 # src/cogs/moderation/__init__.py
 
-from discord.ext import commands
+from discord.ext import commands as discord_commands
 
 from .commands import (
     WarnCommand,
@@ -15,7 +15,7 @@ from .commands import (
 )
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot: discord_commands.Bot) -> None:
     """moderationモジュールのセットアップ"""
     await bot.add_cog(WarnCommand(bot))
     await bot.add_cog(TimeoutCommand(bot))
