@@ -9,12 +9,39 @@ CREATE TABLE IF NOT EXISTS guild_settings (
     point_expiry_days INT DEFAULT 30,
     log_retention_days INT DEFAULT 30,
     mute_role_id BIGINT,
+    
+    -- スパム検出設定
+    spam_enabled BOOLEAN DEFAULT TRUE,
     spam_count INT DEFAULT 5,
     spam_seconds INT DEFAULT 5,
+    
+    -- 連続投稿検出設定
+    duplicate_enabled BOOLEAN DEFAULT TRUE,
+    duplicate_count INT DEFAULT 3,
+    duplicate_seconds INT DEFAULT 30,
+    
+    -- NGワード検出設定
+    ngword_enabled BOOLEAN DEFAULT TRUE,
+    
+    -- メンション検出設定
+    mention_enabled BOOLEAN DEFAULT TRUE,
     mention_limit INT DEFAULT 10,
+    
+    -- 招待リンク検出設定
+    invite_enabled BOOLEAN DEFAULT TRUE,
+    
+    -- 外部リンク検出設定
+    link_enabled BOOLEAN DEFAULT TRUE,
+    
+    -- 新規アカウント制限
+    new_account_enabled BOOLEAN DEFAULT FALSE,
     new_account_days INT DEFAULT 7,
+    
+    -- レイド検出設定
+    raid_enabled BOOLEAN DEFAULT FALSE,
     raid_count INT DEFAULT 10,
     raid_seconds INT DEFAULT 10,
+    
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -43,6 +43,17 @@ class GuildSettingsRepository:
         return settings
 
     @staticmethod
+    async def delete(guild_id: int) -> None:
+        """サーバー設定を削除"""
+        pool = Database.get_pool()
+        await pool.execute(
+            "DELETE FROM guild_settings WHERE guild_id = $1",
+            guild_id
+        )
+
+    # === 基本設定 ===
+
+    @staticmethod
     async def update_point_expiry(guild_id: int, days: int) -> None:
         """ポイント有効期限を更新"""
         pool = Database.get_pool()
@@ -68,6 +79,21 @@ class GuildSettingsRepository:
             guild_id, days
         )
 
+    # === スパム検出設定 ===
+
+    @staticmethod
+    async def update_spam_enabled(guild_id: int, enabled: bool) -> None:
+        """スパム検出の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET spam_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
+        )
+
     @staticmethod
     async def update_spam_settings(guild_id: int, count: int, seconds: int) -> None:
         """スパム検出設定を更新"""
@@ -79,6 +105,64 @@ class GuildSettingsRepository:
             WHERE guild_id = $1
             """,
             guild_id, count, seconds
+        )
+
+    # === 連続投稿検出設定 ===
+
+    @staticmethod
+    async def update_duplicate_enabled(guild_id: int, enabled: bool) -> None:
+        """連続投稿検出の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET duplicate_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
+        )
+
+    @staticmethod
+    async def update_duplicate_settings(guild_id: int, count: int, seconds: int) -> None:
+        """連続投稿検出設定を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET duplicate_count = $2, duplicate_seconds = $3, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, count, seconds
+        )
+
+    # === NGワード検出設定 ===
+
+    @staticmethod
+    async def update_ngword_enabled(guild_id: int, enabled: bool) -> None:
+        """NGワード検出の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET ngword_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
+        )
+
+    # === メンション検出設定 ===
+
+    @staticmethod
+    async def update_mention_enabled(guild_id: int, enabled: bool) -> None:
+        """メンション検出の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET mention_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
         )
 
     @staticmethod
@@ -94,6 +178,51 @@ class GuildSettingsRepository:
             guild_id, limit
         )
 
+    # === 招待リンク検出設定 ===
+
+    @staticmethod
+    async def update_invite_enabled(guild_id: int, enabled: bool) -> None:
+        """招待リンク検出の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET invite_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
+        )
+
+    # === 外部リンク検出設定 ===
+
+    @staticmethod
+    async def update_link_enabled(guild_id: int, enabled: bool) -> None:
+        """外部リンク検出の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET link_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
+        )
+
+    # === 新規アカウント制限 ===
+
+    @staticmethod
+    async def update_new_account_enabled(guild_id: int, enabled: bool) -> None:
+        """新規アカウント制限の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET new_account_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
+        )
+
     @staticmethod
     async def update_new_account_days(guild_id: int, days: int) -> None:
         """新規アカウント制限日数を更新"""
@@ -107,6 +236,21 @@ class GuildSettingsRepository:
             guild_id, days
         )
 
+    # === レイド検出設定 ===
+
+    @staticmethod
+    async def update_raid_enabled(guild_id: int, enabled: bool) -> None:
+        """レイド検出の有効/無効を更新"""
+        pool = Database.get_pool()
+        await pool.execute(
+            """
+            UPDATE guild_settings
+            SET raid_enabled = $2, updated_at = CURRENT_TIMESTAMP
+            WHERE guild_id = $1
+            """,
+            guild_id, enabled
+        )
+
     @staticmethod
     async def update_raid_settings(guild_id: int, count: int, seconds: int) -> None:
         """レイド検出設定を更新"""
@@ -118,13 +262,4 @@ class GuildSettingsRepository:
             WHERE guild_id = $1
             """,
             guild_id, count, seconds
-        )
-
-    @staticmethod
-    async def delete(guild_id: int) -> None:
-        """サーバー設定を削除"""
-        pool = Database.get_pool()
-        await pool.execute(
-            "DELETE FROM guild_settings WHERE guild_id = $1",
-            guild_id
         )

@@ -12,13 +12,10 @@ _recent_messages: dict[int, dict[int, list[tuple[str, datetime]]]] = defaultdict
     lambda: defaultdict(list)
 )
 
-# 設定
-DUPLICATE_WINDOW_SECONDS = 30
-DUPLICATE_THRESHOLD = 3
-
 
 async def detect_duplicate(
-    message: discord.Message
+    message: discord.Message,
+    settings_cache: Optional[dict] = None
 ) -> DetectionResult:
     """連続投稿（同一内容）検出"""
     guild_id = message.guild.id
@@ -30,8 +27,16 @@ async def detect_duplicate(
     if not content:
         return DetectionResult(detected=False)
 
+    # 設定を取得
+    if settings_cache:
+        duplicate_count = settings_cache.get("duplicate_count", 3)
+        duplicate_seconds = settings_cache.get("duplicate_seconds", 30)
+    else:
+        duplicate_count = 3
+        duplicate_seconds = 30
+
     # 古い履歴を削除
-    cutoff = now - timedelta(seconds=DUPLICATE_WINDOW_SECONDS)
+    cutoff = now - timedelta(seconds=duplicate_seconds)
     _recent_messages[guild_id][user_id] = [
         (c, ts) for c, ts in _recent_messages[guild_id][user_id]
         if ts > cutoff
@@ -47,7 +52,7 @@ async def detect_duplicate(
     _recent_messages[guild_id][user_id].append((content, now))
 
     # 閾値チェック
-    if same_count >= DUPLICATE_THRESHOLD - 1:
+    if same_count >= duplicate_count - 1:
         _recent_messages[guild_id][user_id].clear()
         return DetectionResult(
             detected=True,
