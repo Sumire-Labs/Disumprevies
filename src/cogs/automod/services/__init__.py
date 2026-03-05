@@ -11,6 +11,8 @@ from .send_warning import send_warning
 from .handle_raid_join import handle_raid_join
 from .log_raid_activated import log_raid_activated
 from .log_raid_deactivated import log_raid_deactivated
+from .handle_new_account import handle_new_account
+from .log_new_account import log_new_account
 
 __all__ = [
     "check_message",
@@ -24,4 +26,6 @@ __all__ = [
     "handle_raid_join",
     "log_raid_activated",
     "log_raid_deactivated",
+    "handle_new_account",
+    "log_new_account",
 ]

@@ -16,6 +16,7 @@ from .raid_detector import (
     clear_join_history,
     RaidStatus,
 )
+from .new_account_detector import check_new_account, NewAccountResult
 
 __all__ = [
     "DetectionResult",
@@ -33,4 +34,6 @@ __all__ = [
     "deactivate_raid",
     "clear_join_history",
     "RaidStatus",
+    "check_new_account",
+    "NewAccountResult",
 ]
