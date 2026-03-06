@@ -17,7 +17,7 @@ def create_infractions_embed(
     embed = discord.Embed(
         title=f"📋 違反履歴 - {user.display_name}",
         color=discord.Color.orange() if total_points > 0 else discord.Color.green(),
-        timestamp=datetime.utcnow()
+        timestamp=datetime.now(timezone.utc)
     )
 
     embed.set_thumbnail(url=user.display_avatar.url)
@@ -37,7 +37,10 @@ def create_infractions_embed(
     else:
         for v in violations[:10]:
             now = datetime.now(timezone.utc)
-            is_expired = v.expires_at.replace(tzinfo=timezone.utc) < now
+            expires_at = v.expires_at
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=timezone.utc)
+            is_expired = expires_at < now
             status = "🔴 期限切れ" if is_expired else "🟢 有効"
 
             field_value = (

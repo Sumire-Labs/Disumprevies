@@ -1,6 +1,7 @@
-# src\cogs\logger\embeds\message_embeds.py
-from datetime import datetime
-from typing import Optional
+# src/cogs/logger/embeds/message_embeds.py
+
+from datetime import datetime, timezone
+from typing import Optional, Any
 
 import discord
 
@@ -17,7 +18,7 @@ class MessageEmbeds:
         embed = discord.Embed(
             title="🗑️ メッセージ削除",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -76,7 +77,7 @@ class MessageEmbeds:
         embed = discord.Embed(
             title="🗑️ メッセージ一括削除",
             color=discord.Color.dark_red(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -98,7 +99,7 @@ class MessageEmbeds:
             )
 
         # 削除されたメッセージの送信者をカウント
-        authors: dict[int, dict[str, any]] = {}
+        authors: dict[int, dict[str, Any]] = {}
         for msg in messages:
             author_id = msg.author.id
             if author_id not in authors:
@@ -129,7 +130,7 @@ class MessageEmbeds:
         embed = discord.Embed(
             title="✏️ メッセージ編集",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(

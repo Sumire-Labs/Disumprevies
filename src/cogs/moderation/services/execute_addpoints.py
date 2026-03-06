@@ -1,7 +1,7 @@
 # src/cogs/moderation/services/execute_addpoints.py
 
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 import discord
@@ -35,9 +35,10 @@ async def execute_addpoints(
     """ポイントを手動付与"""
     # 設定を取得
     settings = await GuildSettingsRepository.get_or_create(guild.id)
+    expiry_days = settings.point_expiry_days if settings else 30
 
     # 有効期限を計算
-    expires_at = datetime.utcnow() + timedelta(days=settings.point_expiry_days)
+    expires_at = (datetime.now(timezone.utc) + timedelta(days=expiry_days)).replace(tzinfo=None)
 
     # manual違反タイプを取得または作成
     vtype = await ViolationTypesRepository.get(guild.id, "manual")

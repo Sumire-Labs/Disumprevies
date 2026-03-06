@@ -1,5 +1,6 @@
-# src\cogs\logger\embeds\voice_embeds.py
-from datetime import datetime
+# src/cogs/logger/embeds/voice_embeds.py
+
+from datetime import datetime, timezone
 
 import discord
 
@@ -16,7 +17,7 @@ class VoiceEmbeds:
         embed = discord.Embed(
             title="🔊 VC参加",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -49,7 +50,7 @@ class VoiceEmbeds:
         embed = discord.Embed(
             title="🔇 VC退出",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -83,7 +84,7 @@ class VoiceEmbeds:
         embed = discord.Embed(
             title="🔀 VC移動",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -124,7 +125,7 @@ class VoiceEmbeds:
         embed = discord.Embed(
             title=title,
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -162,7 +163,7 @@ class VoiceEmbeds:
         embed = discord.Embed(
             title=title,
             color=color,
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(

@@ -14,7 +14,7 @@ class MemberEmbeds:
         embed = discord.Embed(
             title="📥 メンバー参加",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -67,7 +67,7 @@ class MemberEmbeds:
         embed = discord.Embed(
             title="📤 メンバー退出",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -125,7 +125,7 @@ class MemberEmbeds:
         embed = discord.Embed(
             title="🏷️ ロール変更",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -165,7 +165,7 @@ class MemberEmbeds:
         embed = discord.Embed(
             title="📝 ニックネーム変更",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(

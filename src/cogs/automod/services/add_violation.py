@@ -1,7 +1,5 @@
 # src\cogs\automod\services\add_violation.py
-from datetime import datetime, timedelta
-
-import discord
+from datetime import datetime, timezone, timedelta
 
 from src.core.database.repositories import (
     GuildSettingsRepository,
@@ -30,7 +28,7 @@ async def add_violation(
     # 有効期限を計算
     settings = await GuildSettingsRepository.get(guild_id)
     expiry_days = vtype.expiry_days or (settings.point_expiry_days if settings else 30)
-    expires_at = datetime.utcnow() + timedelta(days=expiry_days)
+    expires_at = (datetime.now(timezone.utc) + timedelta(days=expiry_days)).replace(tzinfo=None)
 
     # 違反を記録
     await ViolationsRepository.create(

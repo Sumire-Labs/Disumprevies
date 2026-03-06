@@ -1,7 +1,7 @@
 # src/cogs/moderation/services/execute_timeout.py
 
 from dataclasses import dataclass
-from datetime import timedelta
+from datetime import timedelta, datetime, timezone
 
 import discord
 
@@ -35,7 +35,7 @@ async def execute_timeout(
 
     # DB記録
     duration_minutes = int(duration.total_seconds() / 60)
-    expires_at = discord.utils.utcnow() + duration
+    expires_at = (datetime.now(timezone.utc) + duration).replace(tzinfo=None)
 
     await PunishmentsRepository.create(
         guild_id=guild.id,

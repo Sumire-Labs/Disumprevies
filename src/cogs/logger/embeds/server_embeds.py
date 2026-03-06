@@ -1,6 +1,6 @@
-# src\cogs\logger\embeds\server_embeds.py
-from datetime import datetime
-from typing import Optional
+# src/cogs/logger/embeds/server_embeds.py
+
+from datetime import datetime, timezone
 
 import discord
 
@@ -26,7 +26,7 @@ class ServerEmbeds:
         embed = discord.Embed(
             title="📁 チャンネル作成",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -57,7 +57,7 @@ class ServerEmbeds:
         embed = discord.Embed(
             title="📁 チャンネル削除",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -84,8 +84,8 @@ class ServerEmbeds:
 
     @staticmethod
     def get_channel_changes(
-            before: discord.abc.GuildChannel,
-            after: discord.abc.GuildChannel
+        before: discord.abc.GuildChannel,
+        after: discord.abc.GuildChannel
     ) -> list[tuple[str, str, str]]:
         """チャンネルの変更点を取得"""
         changes = []
@@ -142,14 +142,14 @@ class ServerEmbeds:
 
     @staticmethod
     def channel_update(
-            channel: discord.abc.GuildChannel,
-            changes: list[tuple[str, str, str]]
+        channel: discord.abc.GuildChannel,
+        changes: list[tuple[str, str, str]]
     ) -> discord.Embed:
         """チャンネル更新のEmbed"""
         embed = discord.Embed(
             title="📁 チャンネル更新",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -175,7 +175,7 @@ class ServerEmbeds:
         embed = discord.Embed(
             title="🏷️ ロール作成",
             color=role.color if role.color != discord.Color.default() else discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -209,7 +209,7 @@ class ServerEmbeds:
         embed = discord.Embed(
             title="🏷️ ロール削除",
             color=discord.Color.red(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -234,8 +234,8 @@ class ServerEmbeds:
 
     @staticmethod
     def get_role_changes(
-            before: discord.Role,
-            after: discord.Role
+        before: discord.Role,
+        after: discord.Role
     ) -> list[tuple[str, str, str]]:
         """ロールの変更点を取得"""
         changes = []
@@ -261,7 +261,6 @@ class ServerEmbeds:
             ))
 
         if before.permissions != after.permissions:
-            # 追加された権限
             added_perms = []
             removed_perms = []
             for perm, value in after.permissions:
@@ -284,14 +283,14 @@ class ServerEmbeds:
 
     @staticmethod
     def role_update(
-            role: discord.Role,
-            changes: list[tuple[str, str, str]]
+        role: discord.Role,
+        changes: list[tuple[str, str, str]]
     ) -> discord.Embed:
         """ロール更新のEmbed"""
         embed = discord.Embed(
             title="🏷️ ロール更新",
             color=role.color if role.color != discord.Color.default() else discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -313,8 +312,8 @@ class ServerEmbeds:
 
     @staticmethod
     def get_guild_changes(
-            before: discord.Guild,
-            after: discord.Guild
+        before: discord.Guild,
+        after: discord.Guild
     ) -> list[tuple[str, str, str]]:
         """サーバーの変更点を取得"""
         changes = []
@@ -381,14 +380,14 @@ class ServerEmbeds:
 
     @staticmethod
     def guild_update(
-            guild: discord.Guild,
-            changes: list[tuple[str, str, str]]
+        guild: discord.Guild,
+        changes: list[tuple[str, str, str]]
     ) -> discord.Embed:
         """サーバー設定更新のEmbed"""
         embed = discord.Embed(
             title="⚙️ サーバー設定変更",
             color=discord.Color.blue(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(

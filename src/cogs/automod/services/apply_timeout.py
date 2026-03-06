@@ -1,5 +1,5 @@
 # src\cogs\automod\services\apply_timeout.py
-from datetime import timedelta
+from datetime import timedelta, datetime, timezone
 
 import discord
 
@@ -17,7 +17,7 @@ async def apply_timeout(
 ) -> bool:
     """タイムアウトを適用"""
     duration = timedelta(minutes=duration_minutes)
-    expires_at = discord.utils.utcnow() + duration
+    expires_at = (datetime.now(timezone.utc) + duration).replace(tzinfo=None)
 
     # タイムアウト実行
     await member.timeout(duration, reason=reason)

@@ -1,4 +1,5 @@
-# src\cogs\logger\services\log_auto_delete.py
+# src/cogs/logger/services/log_auto_delete.py
+
 import discord
 
 from src.core.database.models import LogType, MessageLogEventType
@@ -22,14 +23,14 @@ async def log_auto_delete(
     embed = ModEmbeds.auto_delete(message, violation_type, points, total_points)
     await send_log(bot, guild_id, LogType.MOD, embed)
 
-    # DBに保存
+    # DBに保存（timezone-awareのまま渡す）
     await MessageLogsRepository.create(
         guild_id=guild_id,
         channel_id=message.channel.id,
         message_id=message.id,
         user_id=message.author.id,
         event_type=MessageLogEventType.AUTO_DELETE,
-        created_at=message.created_at,
+        created_at=message.created_at.replace(tzinfo=None),
         content=message.content,
         has_attachments=len(message.attachments) > 0,
         reason=violation_type

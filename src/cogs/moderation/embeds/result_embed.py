@@ -1,6 +1,6 @@
 # src/cogs/moderation/embeds/result_embed.py
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 import discord
@@ -48,7 +48,7 @@ def create_result_embed(
     embed = discord.Embed(
         title=title,
         color=color,
-        timestamp=datetime.utcnow()
+        timestamp=datetime.now(timezone.utc)
     )
 
     embed.add_field(

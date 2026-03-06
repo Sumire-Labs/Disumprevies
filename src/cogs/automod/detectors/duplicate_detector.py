@@ -1,6 +1,6 @@
 # src\cogs\automod\detectors\duplicate_detector.py
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 import discord
@@ -22,7 +22,7 @@ async def detect_duplicate(
     guild_id = message.guild.id
     user_id = message.author.id
     content = message.content.strip().lower()
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
 
     # 空のメッセージは無視
     if not content:

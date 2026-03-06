@@ -1,5 +1,6 @@
-# src\cogs\logger\embeds\mod_embeds.py
-from datetime import datetime
+# src/cogs/logger/embeds/mod_embeds.py
+
+from datetime import datetime, timezone
 from typing import Optional
 
 import discord
@@ -19,7 +20,7 @@ class ModEmbeds:
         embed = discord.Embed(
             title="🛡️ メッセージ自動削除",
             color=discord.Color.orange(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -83,7 +84,7 @@ class ModEmbeds:
         embed = discord.Embed(
             title="⚠️ 違反検出",
             color=discord.Color.yellow(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -142,7 +143,7 @@ class ModEmbeds:
         embed = discord.Embed(
             title=f"{emoji_map.get(action, '📋')} {action.upper()}",
             color=color_map.get(action, discord.Color.greyple()),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
@@ -198,7 +199,7 @@ class ModEmbeds:
         embed = discord.Embed(
             title=f"✅ {action_display.get(action, action)}解除",
             color=discord.Color.green(),
-            timestamp=datetime.utcnow()
+            timestamp=datetime.now(timezone.utc)
         )
 
         embed.add_field(
