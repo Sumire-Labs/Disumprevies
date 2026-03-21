@@ -1,0 +1,28 @@
+{
+  "name": "@disumprevies/premium",
+  "version": "0.0.1",
+  "description": "Disumprevies premium features (BSL licensed)",
+  "license": "BUSL-1.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@disumprevies/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.6",
+    "typescript": "^5.6.3",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
+    "eslint": "^9.14.0",
+    "prettier": "^3.3.3",
+    "vitest": "^2.1.5",
+    "discord.js": "^14.16.3"
+  }
+}

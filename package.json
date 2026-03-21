@@ -1,0 +1,23 @@
+{
+  "name": "disumprevies",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Discord anti-raid/anti-spam public bot",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --filter @disumprevies/core dev",
+    "build": "pnpm --filter @disumprevies/core build && pnpm --filter @disumprevies/premium build",
+    "lint": "pnpm --filter @disumprevies/core lint && pnpm --filter @disumprevies/premium lint",
+    "format": "prettier --write \"packages/**/*.{ts,json}\" \"locales/**/*.json\"",
+    "test": "pnpm --filter @disumprevies/core test && pnpm --filter @disumprevies/premium test",
+    "prisma:migrate": "pnpm --filter @disumprevies/core prisma:migrate",
+    "prisma:generate": "pnpm --filter @disumprevies/core prisma:generate"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

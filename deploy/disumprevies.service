@@ -1,0 +1,80 @@
+# =============================================================================
+# Disumprevies — systemd service unit
+#
+# Installation (home server / VPS):
+#
+#   1. Copy this file:
+#        sudo cp deploy/disumprevies.service /etc/systemd/system/
+#
+#   2. Create a dedicated user (optional but recommended):
+#        sudo useradd --system --no-create-home --shell /usr/sbin/nologin disumprevies
+#
+#   3. Clone the repo and build:
+#        git clone https://github.com/your-org/disumprevies.git /opt/disumprevies
+#        cd /opt/disumprevies
+#        pnpm install --frozen-lockfile
+#        pnpm prisma:generate
+#        pnpm prisma:migrate   # first run only; use 'prisma migrate deploy' in prod
+#        pnpm build
+#
+#   4. Create the environment file:
+#        sudo cp /opt/disumprevies/.env.example /etc/disumprevies.env
+#        sudo editor /etc/disumprevies.env       # fill in real values
+#        sudo chmod 600 /etc/disumprevies.env
+#
+#   5. Edit WorkingDirectory and ExecStart below if you used a different path.
+#
+#   6. Enable and start:
+#        sudo systemctl daemon-reload
+#        sudo systemctl enable --now disumprevies
+#
+#   Useful commands:
+#        sudo systemctl status  disumprevies
+#        sudo journalctl -u disumprevies -f
+#        sudo systemctl restart disumprevies
+# =============================================================================
+
+[Unit]
+Description=Disumprevies Discord Bot
+Documentation=https://github.com/your-org/disumprevies
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# --- User & working directory ---
+User=disumprevies
+Group=disumprevies
+WorkingDirectory=/opt/disumprevies
+
+# --- Environment ---
+EnvironmentFile=/etc/disumprevies.env
+
+# --- Start command ---
+# Uses the compiled JS entrypoint.  Adjust if you installed Node.js in a
+# non-standard path (e.g. via nvm: ExecStart=/home/disumprevies/.nvm/versions/node/v20.x.x/bin/node ...)
+ExecStart=/usr/bin/node packages/core/dist/bot/index.js
+
+# --- Restart policy ---
+Restart=on-failure
+RestartSec=10s
+# Restart at most 5 times within 2 minutes before giving up
+StartLimitInterval=120s
+StartLimitBurst=5
+
+# --- Security hardening ---
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+# Allow writes only to the project directory (for prisma migrations log etc.)
+ReadWritePaths=/opt/disumprevies
+
+# --- Logging ---
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=disumprevies
+
+[Install]
+WantedBy=multi-user.target

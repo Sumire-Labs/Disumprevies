@@ -1,0 +1,12 @@
+{
+  "detector.wordFilter.invalidRegex": "Invalid regex pattern in word filter",
+  "detector.wordFilter.reason": "Message matched word filter: {pattern}",
+  "action.warn.dm": "You have received a warning in **{guildName}**: {reason}",
+  "action.mute.dm": "You have been muted in **{guildName}**: {reason}",
+  "action.kick.dm": "You have been kicked from **{guildName}**: {reason}",
+  "action.ban.dm": "You have been banned from **{guildName}**: {reason}",
+  "log.infraction.created": "Infraction recorded for <@{userId}>: {type} — {reason}",
+  "error.generic": "An error occurred. Please try again later.",
+  "error.missingPermissions": "I don't have the required permissions to do that.",
+  "command.ping.reply": "Pong! Latency: {latency}ms"
+}

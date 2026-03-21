@@ -1,0 +1,96 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Guild {
+  id          String       @id
+  plan        Plan         @default(FREE)
+  locale      String       @default("en")
+  settings    Json         @default("{}")
+  exemptRoles String[]
+  logChannel  String?
+  modChannel  String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  infractions Infraction[]
+  wordFilters WordFilter[]
+  appeals     Appeal[]
+}
+
+model Infraction {
+  id        Int            @id @default(autoincrement())
+  guildId   String
+  userId    String
+  type      InfractionType
+  reason    String?
+  points    Int            @default(1)
+  moderator String?
+  auto      Boolean        @default(true)
+  expiresAt DateTime?
+  createdAt DateTime       @default(now())
+  guild     Guild          @relation(fields: [guildId], references: [id])
+
+  @@index([guildId, userId])
+  @@index([guildId, createdAt])
+}
+
+model WordFilter {
+  id        Int      @id @default(autoincrement())
+  guildId   String
+  pattern   String
+  isRegex   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  guild     Guild    @relation(fields: [guildId], references: [id])
+
+  @@index([guildId])
+}
+
+model Appeal {
+  id          Int           @id @default(autoincrement())
+  guildId     String
+  userId      String
+  type        AppealType
+  reason      String
+  status      AppealStatus  @default(PENDING)
+  reviewerId  String?
+  reviewNote  String?
+  infractionId Int?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  guild       Guild         @relation(fields: [guildId], references: [id])
+
+  @@index([guildId, status])
+  @@index([guildId, userId])
+}
+
+enum AppealType {
+  BAN
+  MUTE
+}
+
+enum AppealStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Plan {
+  FREE
+  PREMIUM
+}
+
+enum InfractionType {
+  WARN
+  MUTE
+  KICK
+  BAN
+}

@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install)",
+      "Bash(where:*)",
+      "Bash(npm root:*)",
+      "Bash(cmd /c \"where pnpm\")",
+      "Bash(cmd /c \"where pnpm 2>&1\")",
+      "Bash(cmd /c:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(\"/c/Program Files/nodejs/node_modules/corepack/shims/pnpm\" --version)",
+      "Bash(export PNPM=\"/c/Program Files/nodejs/node_modules/corepack/shims/pnpm\")",
+      "Bash(\"$PNPM\" install)",
+      "Bash(\"/c/Program Files/nodejs/node_modules/corepack/shims/pnpm\" prisma:generate)",
+      "Bash(\"/c/Program Files/nodejs/node_modules/corepack/shims/pnpm\" build)",
+      "Bash(\"/c/Program Files/nodejs/node_modules/corepack/shims/pnpm\" lint)",
+      "Bash(\"/c/Program Files/nodejs/node_modules/corepack/shims/pnpm\" test)",
+      "Bash(\"/c/Program Files/nodejs/node_modules/corepack/shims/pnpm\" add zod)",
+      "Bash(\"C:\\\\Users\\\\hayat\\\\Desktop\\\\Development\\\\Disumprevies\\\\packages\\\\core\\\\src\\\\index.ts\" << 'EOFILE'\n// Public API exports for consumers \\(e.g. packages/premium\\)\nexport type {\n  Detector,\n  DetectionResult,\n  DetectionAction,\n  DetectionContext,\n  MessageDetectionContext,\n  DetectorResult,\n  DetectorAction,\n  DetectorContext,\n  MessageDetectorContext,\n} from './types/index.js';\nexport { Feature, checkFeatureAccess } from './gates/index.js';\nexport { prisma } from './db.js';\nexport { logger, logInfractionToChannel } from './logger/index.js';\nexport type { InfractionLogOptions } from './logger/index.js';\nexport { t, tSync, invalidateGuildLocaleCache } from './i18n/index.js';\nexport { config } from './config.js';\nexport { DetectionPipeline } from './pipeline.js';\nexport type { GuildConfig, PipelineOptions } from './pipeline.js';\nexport {\n  ActionExecutor,\n  getUserPoints,\n  addPoints,\n  resolveAction,\n  THRESHOLDS,\n} from './actions/index.js';\nexport type { ActionContext, ActionResult, ThresholdEntry } from './actions/index.js';\nEOFILE)"
+    ]
+  }
+}

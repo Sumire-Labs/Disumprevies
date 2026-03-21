@@ -1,0 +1,33 @@
+# Dependencies (installed fresh in Docker)
+node_modules
+**/node_modules
+
+# Compiled output (built in Docker)
+**/dist
+
+# Environment files (injected at runtime)
+.env
+.env.*
+!.env.example
+
+# Development / editor files
+.git
+.gitignore
+*.md
+!README.md
+.vscode
+.idea
+
+# Test artifacts
+coverage
+*.test.ts
+**/__tests__
+
+# Docker files (not needed inside the build)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# OS artifacts
+.DS_Store
+Thumbs.db

@@ -1,0 +1,12 @@
+{
+  "detector.wordFilter.invalidRegex": "ワードフィルターの正規表現が無効です",
+  "detector.wordFilter.reason": "メッセージがワードフィルターに一致しました: {pattern}",
+  "action.warn.dm": "**{guildName}** で警告を受けました: {reason}",
+  "action.mute.dm": "**{guildName}** でミュートされました: {reason}",
+  "action.kick.dm": "**{guildName}** からキックされました: {reason}",
+  "action.ban.dm": "**{guildName}** からBANされました: {reason}",
+  "log.infraction.created": "<@{userId}> への違反記録: {type} — {reason}",
+  "error.generic": "エラーが発生しました。後ほど再試行してください。",
+  "error.missingPermissions": "その操作に必要な権限がありません。",
+  "command.ping.reply": "ポン！レイテンシ: {latency}ms"
+}

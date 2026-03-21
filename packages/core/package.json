@@ -1,0 +1,48 @@
+{
+  "name": "@disumprevies/core",
+  "version": "0.0.1",
+  "description": "Disumprevies core bot (MIT licensed)",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "NODE_OPTIONS=--conditions=source tsx watch src/bot.ts",
+    "deploy": "tsx src/commands/deploy.ts",
+    "deploy:dry-run": "tsx src/commands/deploy.ts --dry-run",
+    "build": "tsc --project tsconfig.json",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "vitest run",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "zod": "^4.3.6"
+  },
+  "optionalDependencies": {
+    "@disumprevies/premium": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.6",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
+    "eslint": "^9.14.0",
+    "prettier": "^3.3.3",
+    "prisma": "^5.22.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
+  }
+}
